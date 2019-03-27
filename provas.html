@@ -52,27 +52,40 @@
   <!-- Page Content -->
   <div class="container">
 
-    <!-- Jumbotron Header -->
-    <header class="jumbotron my-4">
-      <h1 class="display-3">Bem vindo!</h1>
-      <p class="lead">Nesse repositório se encontra provas e listas de exercícios de várias disciplinas do curso de Ciência de Computação da UFT. O objetivo dessa página é fornecer informações que ajude os alunos durante a matéria.</p>
-      <a href="#" class="btn btn-primary btn-lg">.....</a>
-    </header>
+  	<header style="padding-right: 10px; margin-top: 20px;">
+  		<h1 class="display-4">Provas</h1>
+  	</header>
 
     <!-- Page Features -->
     <div class="row text-center">
 
       <div class="col-lg-3 col-md-6 mb-4">
         <div class="card h-100">
-          <img class="card-img-top" src="http://placehold.it/500x325" alt="">
+          <img class="card-img-top" src="./images/provas/prova_glenda_01.jpeg" alt="" style="height: 280px;">
           <div class="card-body">
-            <h4 class="card-title">Provas</h4>
-            <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sapiente esse necessitatibus neque.</p>
+            <h4 class="card-title">Processamento de Imagens</h4>
+            <p class="card-text">Professora: Glenda Botelho</p>
           </div>
           <div class="card-footer">
-            <a href="#" class="btn btn-primary">Visualizar</a>
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal"> Visualizar </button>
           </div>
         </div>
+
+        <div class="modal fade" id="myModal" role="dialog"  >
+        	<div class="modal-dialog">
+      					<div content>
+      						<div class="modal-content" style="width: 753px;">
+        						<div class="modal-header">
+          							<!--h4 class="modal-title" style="color: black; text-align: left;">Adicionar Imagem</h4-->
+          							<button type="button" class="close" data-dismiss="modal">&times;</button>
+        						</div>
+	        					<div class="modal-body">
+	        						<img src="images/provas/prova_glenda_01.jpeg">
+	        					</div>
+      						</div>
+					    </div>
+					  </div>
+		</div>
       </div>
 
       <div class="col-lg-3 col-md-6 mb-4">
