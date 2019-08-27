@@ -20,7 +20,7 @@
  *    - 3.2. Tour result
  *    - 3.3. Tour view
  *    - 3.4. About us
- *    - 3.5. Blog 
+ *    - 3.5. Blog
  *    - 3.6. Blog detail
  *    - 3.7. Hotel result
  *    - 3.8. Hotel view
@@ -2614,7 +2614,7 @@
   vertical-align: middle;
   width: 40%;
   height: 100%;
-  background-color: rgba(255, 255, 255, 0.85);
+  background-color: rgba(23, 21, 21, 0.85);
 }
 .banner-sale-1 .banner-right {
   display: table-cell;
