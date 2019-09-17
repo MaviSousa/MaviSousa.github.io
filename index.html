@@ -97,29 +97,31 @@
                                     <div class="col-xs-12">
                                         <div class="tab-content">
                                             <div role="tabpanel" id="flight" class="tab-pane fade in active">
-                                                <div class="find-widget find-flight-widget widget"><h4
-                                                        class="title-widgets">CADASTRAR RESTAURANTE</h4>
+                                                <div class="find-widget find-flight-widget widget">
+                                                    <h4 class="title-widgets">CADASTRAR RESTAURANTE</h4>
 
-                                                    <form class="content-widget">
-                                                        <div class="ffw-radio-selection"><span
-                                                                class="ffw-radio-btn-wrapper"><input type="radio"
-                                                                                                     name="flight type"
-                                                                                                     value="multiple cities"
-                                                                                                     id="flight-type-3"
-                                                                                                     class="ffw-radio-btn"></span>
-
-                                                            <div class="stretch">&nbsp;</div>
-                                                        </div>
+                                                    <form id="contact-form" class="content-widget">
                                                         <div class="text-input small-margin-top">
                                                             <div class="place text-box-wrapper">
-                                                                <div class="input-group"><input type="text"
-                                                                                                placeholder="Nome do Restaurante"
-                                                                                                class="tb-input"></div>
+                                                                <div class="input-group">
+                                                                    <input id="nameRestaurant" type="text"
+                                                                           placeholder="Nome do Restaurante"
+                                                                           class="tb-input">
+                                                                </div>
                                                             </div>
                                                             <div class="place text-box-wrapper">
-                                                                <div class="input-group"><input type="text"
+                                                                <div class="input-group">
+                                                                    <input id="nameOwner" type="text"
                                                                                                 placeholder="Nome do dono"
-                                                                                                class="tb-input"></div>
+                                                                                                class="tb-input">
+                                                                </div>
+                                                            </div>
+                                                            <div >
+                                                                <div class="input-group">
+                                                                    <textarea name="message" id="message" rows="2"
+                                                                              ></textarea>
+                                                                </div>
+
                                                             </div>
                                                             <button type="submit" data-hover="Cadastrar"
                                                                     class="btn btn-slide"><span
@@ -273,17 +275,6 @@
                                                 </div>
                                             </form>
                                         </div>
-                                        <main>
-                                        		<p>ENVIAR EMAIL</p>
-                                        		<form class="contact-form" action="contact-form.php" method="post">
-                                        			<input type="text" name="name" placeholder="Nome:">
-                                        			<input type="text" name="email" placeholder="Email:">
-                                        			<input type="text" name="assunto" placeholder="Assunto:">
-                                        			<textarea name="message" placeholder="Mensagem"></textarea>
-
-                                        			<button type="submit" name="submit">Enviar</button>
-                                        		</form>
-                                        	</main>
                                     </div>
                                 </div>
                             </div>
@@ -350,10 +341,72 @@
 <script src="assets/libs/slick-slider/slick.min.js"></script>
 <script src="assets/libs/selectbox/js/jquery.selectbox-0.2.js"></script>
 
+<!-- Script for firebase -->
+<script src="https://www.gstatic.com/firebasejs/6.6.1/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/6.4.0/firebase-database.js"></script>
+
+
+<script>
+    /* ================== CONTACT FORM ================ */
+
+    var firebaseConfig = {
+        apiKey: "AIzaSyC73DdcjRRmT7F5r2CUqFR0MI-tMgjCfII",
+        authDomain: "contact-form-b7895.firebaseapp.com",
+        databaseURL: "https://contact-form-b7895.firebaseio.com",
+        projectId: "contact-form-b7895",
+        storageBucket: "",
+        messagingSenderId: "513146989805",
+        appId: "1:513146989805:web:0fa53fdc6ddb43b19b30e4"
+    };
+    // Initialize Firebase
+    firebase.initializeApp(firebaseConfig);
+
+    //Reference messages collections
+    var messagesRef = firebase.database().ref('messages');
+
+
+
+    // Listen for form submit
+    document.getElementById('contact-form').addEventListener('submit', submitForm);
+
+
+    // Submit Form
+    function submitForm(e) {
+        e.preventDefault();
+
+        // Get values
+        var nameRestaurant = getInputVal('nameRestaurant');
+        var nameOwner = getInputVal('nameOwner');
+        var message = getInputVal('message');
+
+
+        // Save message
+        saveMessage(nameRestaurant, nameOwner, message);
+        console.log("Sucesso!");
+    }
+
+    // Function to get form values
+
+    function getInputVal(id) {
+        return document.getElementById(id).value;
+    }
+
+    // Save message to firebase
+    function saveMessage(nameRestaurant, nameOwner, message){
+        var newMessageRef = messagesRef.push();
+        newMessageRef.set({
+            nameRestaurant : nameRestaurant,
+            nameOwner : nameOwner,
+            message: message,
+        });
+    }
+</script>
 <!--script(src="assets/libs/parallax/jquery.data-parallax.min.js")--><!-- MAIN JS-->
 <script src="assets/js/main.js"></script>
 <!-- LOADING JS FOR PAGE-->
 <script src="assets/js/pages/home-page.js"></script>
 <script src="assets/libs/bootstrap-datepicker/js/bootstrap-datepicker.min.js"></script>
+
+
 </body>
 </html>
