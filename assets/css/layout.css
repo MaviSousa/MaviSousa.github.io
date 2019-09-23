@@ -1699,7 +1699,7 @@ a:hover {
 }
 .find-widget .text-box-wrapper {
   text-align: left;
-  margin-top: 20px;
+  margin-top: 20px !important;
   float: left;
   vertical-align: bottom;
 }

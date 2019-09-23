@@ -105,29 +105,52 @@
                                                             <div class="place text-box-wrapper">
                                                                 <div class="input-group">
                                                                     <input id="nameRestaurant" type="text"
-                                                                           placeholder="Nome do Restaurante"
-                                                                           class="tb-input">
+                                                                           placeholder="Nome do Restaurante*"
+                                                                           class="tb-input" required>
                                                                 </div>
                                                             </div>
                                                             <div class="place text-box-wrapper">
                                                                 <div class="input-group">
                                                                     <input id="nameOwner" type="text"
-                                                                                                placeholder="Nome do dono"
-                                                                                                class="tb-input">
+                                                                           placeholder="Nome do dono*" class="tb-input" required>
                                                                 </div>
                                                             </div>
-                                                            <div >
+                                                            <div class="place text-box-wrapper">
                                                                 <div class="input-group">
-                                                                    <textarea name="message" id="message" rows="2"
-                                                                              ></textarea>
+                                                                    <input id="email" type="email"
+                                                                           placeholder="Email*"
+                                                                           class="tb-input" required>
                                                                 </div>
-
                                                             </div>
-                                                            <button type="submit" data-hover="Cadastrar"
-                                                                    class="btn btn-slide"><span
-                                                                    class="text">CADASTRAR</span><span
-                                                                    class="icons fa fa-long-arrow-right"></span>
-                                                            </button>
+                                                            <div class="place text-box-wrapper">
+                                                                <div class="input-group">
+                                                                    <input id="cnpj" name="cpnj" type="text"
+                                                                           placeholder="CNPJ*"
+                                                                           class="tb-input" required>
+                                                                </div>
+                                                            </div>
+                                                            <div class="place text-box-wrapper">
+                                                                <div class="input-group">
+                                                                    <input id="telefone" name="telefone" type="text"
+                                                                           placeholder="Telefone*"
+                                                                           class="tb-input" required>
+                                                                </div>
+                                                            </div>
+                                                            <div class="place text-box-wrapper">
+                                                                <div class="input-group">
+                                                                    <input id="whatsapp" type="text"
+                                                                           placeholder="Whatsapp"
+                                                                           class="tb-input">
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-12" style="margin-top: 20px;">
+                                                                <button type="submit" data-hover="Cadastrar"
+                                                                        class="btn btn-slide" style="position: relative"><span
+                                                                        class="text">CADASTRAR</span><span
+                                                                        class="icons fa fa-long-arrow-right"></span>
+                                                                </button>
+                                                            </div>
+
                                                         </div>
                                                     </form>
                                                 </div>
@@ -340,11 +363,23 @@
 <script src="assets/libs/wow-js/wow.min.js"></script>
 <script src="assets/libs/slick-slider/slick.min.js"></script>
 <script src="assets/libs/selectbox/js/jquery.selectbox-0.2.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.10/jquery.mask.js"></script>
 
 <!-- Script for firebase -->
 <script src="https://www.gstatic.com/firebasejs/6.6.1/firebase-app.js"></script>
 <script src="https://www.gstatic.com/firebasejs/6.4.0/firebase-database.js"></script>
+<script>
+    /* =========== CNPJ MASK ======================== */
 
+    $(document).ready(function () {
+
+        $("#cnpj").mask('000.000.000/00000-00', {reverse: true});
+        $("#telefone").mask('(63) 99999-9999', {reverse: true});
+        console.log("AAAAAAAAAAAAAaaa!")
+
+    });
+
+</script>
 
 <script>
     /* ================== CONTACT FORM ================ */
@@ -365,7 +400,6 @@
     var messagesRef = firebase.database().ref('messages');
 
 
-
     // Listen for form submit
     document.getElementById('contact-form').addEventListener('submit', submitForm);
 
@@ -377,11 +411,15 @@
         // Get values
         var nameRestaurant = getInputVal('nameRestaurant');
         var nameOwner = getInputVal('nameOwner');
-        var message = getInputVal('message');
+        var email = getInputVal('email');
+        var cnpj = getInputVal('cnpj');
+        var telefone = getInputVal('telefone');
+        var whatsapp = getInputVal('whatsapp');
+        var message = '';
 
 
         // Save message
-        saveMessage(nameRestaurant, nameOwner, message);
+        saveMessage(nameRestaurant, nameOwner, email, cnpj, telefone, whatsapp, message);
         console.log("Sucesso!");
     }
 
@@ -392,12 +430,15 @@
     }
 
     // Save message to firebase
-    function saveMessage(nameRestaurant, nameOwner, message){
+    function saveMessage(nameRestaurant, nameOwner, email, cnpj, telefone, whatsapp) {
         var newMessageRef = messagesRef.push();
         newMessageRef.set({
-            nameRestaurant : nameRestaurant,
-            nameOwner : nameOwner,
-            message: message,
+            nameRestaurant: nameRestaurant,
+            nameOwner: nameOwner,
+            email: email,
+            cnpj: cnpj,
+            telefone: telefone,
+            whatsapp: whatsapp,
         });
     }
 </script>
